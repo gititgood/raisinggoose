@@ -12,7 +12,7 @@ export default async function Home() {
       {!posts?.length && <p>No posts yet.</p>}
 
       <ul className="space-y-6">
-        {posts?.map((post) => (
+        {posts?.map((post:any) => (
           <li key={post._id} className="border rounded-xl p-4">
             {post.mainImage && (
               // eslint-disable-next-line @next/next/no-img-element
