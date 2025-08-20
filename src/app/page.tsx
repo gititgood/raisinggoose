@@ -1,29 +1,29 @@
 import { client } from '@/lib/sanity.client'
-import { POSTS_QUERY } from '@/lib/queries'
 import { urlFor } from '@/lib/sanity.image'
-
-export default async function Home() {
-  const posts = await client.fetch(POSTS_QUERY)
+import type { Post } from '@/types'
+export default async function HomePage() {
+  const posts = await client.fetch<Post[]>(
+    `*[_type == "post"] | order(_createdAt desc)[0...20]{
+      _id, title, "slug": slug.current, mainImage, excerpt, _createdAt
+    }`
+  )
 
   return (
-    <main className="max-w-3xl mx-auto p-6 space-y-8">
-      <h1 className="text-3xl font-bold">Raising Goose</h1>
-
-      {!posts?.length && <p>No posts yet.</p>}
-
+    <main>
+      <h1>Raising Goose</h1>
       <ul className="space-y-6">
-        {posts?.map((post:any) => (
+        {(posts ?? []).map((post) => (
           <li key={post._id} className="border rounded-xl p-4">
             {post.mainImage && (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                alt={post.title}
-                src={urlFor(post.mainImage).width(1200).height(630).fit('crop').url()}
-                className="w-full h-auto rounded-lg mb-3"
+                src={urlFor(post.mainImage).width(600).height(400).url()}
+                alt={post.title ?? 'Untitled'}
+                className="rounded-lg"
               />
             )}
-            <h2 className="text-xl font-semibold mb-1">{post.title}</h2>
-            {post.excerpt && <p className="text-sm opacity-80">{post.excerpt}</p>}
+            <h2 className="text-lg font-semibold">{post.title}</h2>
+            <p>{post.excerpt}</p>
           </li>
         ))}
       </ul>
