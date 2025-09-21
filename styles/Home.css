@@ -31,7 +31,6 @@
 .rg-slide {
   flex: 0 0 100%;
   min-width: 100%;
-  max-width: 400px;
 }
 
 /* Split layout: stack on mobile, side-by-side on desktop */

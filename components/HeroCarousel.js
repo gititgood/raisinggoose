@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import { urlFor } from '@/lib/sanity.image'
+import Image from 'next/image'
 
 export default function HeroCarousel({
   slides = [],
@@ -69,10 +70,12 @@ export default function HeroCarousel({
               {/* IMAGE side — no crop, honest framing */}
               <div className="rg-media">
                 {img ? (
-                  <img
+                  <Image
                     src={img}
                     alt={s.alt || s.heading || 'Carousel image'}
                     className="rg-img"
+                    width={800}
+                    height={600}
                   />
                 ) : (
                   <div className="rg-img-fallback">No image</div>

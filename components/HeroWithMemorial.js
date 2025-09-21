@@ -4,7 +4,7 @@ export default function HeroMemorial() {
     <>
       <section className="rg-hero-fixed" style={{ backgroundImage: "url('/goose-hero.jpg')" }}>
         <div className="rg-hero-overlay">
-          <h2>Follow Goose's Journey</h2>
+          <h2>Follow Goose&apos;s Journey</h2>
           <p>Training, play, and the path to calm confidence.</p>
         </div>
       </section>
