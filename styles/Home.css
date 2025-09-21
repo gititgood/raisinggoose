@@ -1,0 +1,157 @@
+/* Header */
+.rg-container{
+  margin:0 auto;
+}
+
+.rg-header{padding:18px 24px;display:flex;justify-content:space-between;align-items:center}
+.rg-logo{margin:0;font-size:32px}
+.rg-nav a{margin-left:16px;text-decoration:none;font-size:15px;color:#333;font-weight:600}
+.rg-nav a:hover{color:#000}
+
+/* Carousel */
+/* Root container */
+.rg-hero-carousel {
+  --rg-hero-min-h: 56vh;                 /* can be overridden inline via style prop */
+  --rg-index: 0;                         /* updated by component */
+  position: relative;
+  overflow: hidden;
+  min-height: var(--rg-hero-min-h);
+  background: #000;                      /* pleasant default while images load */
+}
+
+/* Track (one slide per view) */
+.rg-slides {
+  display: flex;
+  transition: transform 0.6s ease;
+  will-change: transform;
+  transform: translateX(calc(-100% * var(--rg-index)));
+}
+
+/* Each slide takes full viewport width */
+.rg-slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+}
+
+/* Split layout: stack on mobile, side-by-side on desktop */
+.rg-split {
+  display: flex;
+  flex-direction: column;
+  min-height: var(--rg-hero-min-h);
+  background: #000;
+}
+@media (min-width: 1024px) {
+  .rg-split { flex-direction: row; }
+  .rg-split.rg-row-reverse { flex-direction: row-reverse; }
+}
+
+/* Image side */
+.rg-media {
+  flex: 1 1 50%;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+.rg-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;     /* << no crop; show entire iPhone photo */
+  display: block;
+}
+.rg-img-fallback { color: #888; padding: 24px; }
+
+/* Copy side */
+.rg-copy {
+  flex: 1 1 50%;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  color: #fff;
+  background: linear-gradient(90deg, rgba(0,0,0,.45), rgba(0,0,0,.2));
+}
+@media (min-width: 1024px) {
+  .rg-copy { padding: 36px; }
+}
+.rg-copy-inner { max-width: 720px; }
+.rg-h2 { margin: 0 0 8px; font-size: clamp(22px, 3vw, 36px); line-height: 1.15; }
+.rg-sub, .rg-body { margin: 6px 0 0; opacity: .95; }
+.rg-cta {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Dots centered at bottom */
+.rg-nav-dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: max(12px, env(safe-area-inset-bottom));
+  display: flex;
+  gap: 8px;
+  width: max-content;
+  z-index: 5;
+}
+.rg-nav-dots span {
+  width: 8px; height: 8px; border-radius: 9999px;
+  background: rgba(255,255,255,0.55);
+  cursor: pointer;
+}
+.rg-nav-dots span.is-active { background: rgba(255,255,255,1); }
+
+
+/* Second hero + memorial */
+.rg-hero-fixed{min-height:50vh;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;background-size:cover;background-position:center;position:relative}
+.rg-hero-fixed::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.4)}
+.rg-hero-overlay{position:relative;z-index:1;background:rgba(0,0,0,.35);padding:20px;border-radius:8px}
+.rg-memorial{max-width:900px;margin:20px auto;padding:20px;border:1px solid var(--rg-border);border-radius:8px;background:#fff;text-align:center}
+
+/* Feed */
+.rg-feed-wrap{max-width:1100px;margin:20px auto;padding:0 20px}
+.rg-feed{display:grid;gap:12px}
+.rg-feed>h2{margin:0 0 8px;font-size:20px}
+.rg-article{border:1px solid var(--rg-border);border-radius:8px;background:#fff;padding:8px;display:flex;gap:10px;align-items:flex-start}
+.rg-article-thumb{width:90px;height:70px;object-fit:cover;border-radius:6px;transition:transform .2s}
+.rg-article-thumb:hover{transform:scale(1.04)}
+.rg-article-body{flex:1;display:flex;flex-direction:column}
+.rg-article-body h3{margin:0 0 4px;font-size:15px}
+.rg-article-body p{margin:0 0 6px;font-size:12px;color:var(--rg-muted)}
+.rg-link{margin-top:auto;text-decoration:none;font-size:12px;font-weight:600}
+.rg-labels{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+.rg-labels span{font-size:11px;border:1px solid var(--rg-border);border-radius:12px;padding:2px 8px;background:#f9f9f9}
+
+/* Level up */
+.rg-level-up{max-width:1100px;margin:20px auto;padding:20px;border:1px solid var(--rg-border);border-radius:8px;background:#fff}
+.rg-level-up h2{margin:0 0 10px;font-size:20px}
+.rg-age{font-size:16px;margin-bottom:6px}
+.rg-xp-bar{height:14px;background:#eee;border-radius:999px;overflow:hidden;margin-bottom:10px}
+.rg-xp-bar span{display:block;height:100%;background:#999}
+.rg-scorecard{display:grid;gap:8px}
+.rg-stat{display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.rg-bar{flex:1;margin-left:10px;height:10px;background:#eee;border-radius:999px;overflow:hidden}
+.rg-bar span{display:block;height:100%;background:#999}
+
+/* Categories */
+.rg-categories{max-width:1100px;margin:30px auto;padding:0 20px;display:flex;flex-wrap:wrap;gap:10px}
+.rg-chip{border:1px solid var(--rg-border);border-radius:20px;padding:6px 14px;text-decoration:none;font-size:14px;background:#fff}
+
+/* Tools */
+.rg-tools{max-width:1100px;margin:30px auto;padding:0 20px}
+.rg-tool-list{list-style:none;padding:0;display:grid;gap:12px}
+.rg-tool-list li{border:1px solid var(--rg-border);border-radius:8px;padding:12px;background:#fff}
+
+/* Footer */
+.rg-footer{margin:40px auto;text-align:center;font-size:13px}
+
+/* Responsive */
+@media (max-width: 800px){
+  .rg-header{flex-direction:column;gap:10px}
+  .rg-nav a{margin-left:0;margin-right:10px}
+}

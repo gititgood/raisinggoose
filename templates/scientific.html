@@ -1,0 +1,125 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Raising Goose — Scientific Behavioral Journal</title>
+<style>
+:root{
+--brand:#8b0000; /* deep red per Rob's preference */
+--ink:#1a1a1a;
+--muted:#6b7280;
+--bg:#ffffff;
+--bg-soft:#f8f8f8;
+--card:#ffffff;
+--radius:14px;
+--shadow:0 8px 24px rgba(0,0,0,.08);
+--mono: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+--sans: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);}
+.wrap{display:grid;grid-template-columns:320px 1fr;min-height:100dvh}
+aside{background:var(--bg-soft);border-right:2px solid var(--brand);padding:24px;}
+main{padding:32px;}
+
+
+header.site{
+padding:20px 24px;border-bottom:4px solid var(--brand);display:flex;gap:16px;align-items:center;background:#fff;position:sticky;top:0;z-index:10
+}
+.logo{width:36px;height:36px;border:3px solid var(--brand);border-radius:50%;display:grid;place-items:center;font-weight:800;color:var(--brand)}
+.title h1{margin:0;font-size:22px;}
+.title small{color:var(--muted)}
+
+
+.card{background:var(--card);border:1px solid #e6e6e6;border-left:4px solid var(--brand);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin-bottom:18px}
+.card h2{margin:0 0 8px;font-size:18px;color:#111}
+.meta{display:grid;gap:12px}
+.kv{display:grid;grid-template-columns:120px 1fr;gap:8px;font-size:14px}
+.kv .k{color:var(--muted)}
+
+
+.section-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.badge{display:inline-flex;gap:8px;align-items:center;font:12px var(--mono);background:#fff;border:1px dashed var(--brand);color:var(--brand);padding:6px 10px;border-radius:999px}
+
+
+.chart{height:180px;background:repeating-linear-gradient(90deg,#f3f4f6 0 12px,#fff 12px 24px);border-radius:10px;border:1px solid #e5e7eb;display:grid;place-items:center;color:var(--muted);font:13px var(--mono)}
+
+
+footer.site{padding:24px;color:var(--muted);font-size:13px;border-top:1px solid #eee}
+
+
+@media (max-width: 960px){
+.wrap{grid-template-columns:1fr}
+aside{border-right:none;border-bottom:2px solid var(--brand)}
+.section-grid{grid-template-columns:1fr}
+}
+</style>
+<body>
+<header class="site">
+<div class="logo">G</div>
+<div class="title">
+<h1>Raising Goose — Behavioral Log</h1>
+<small>Field notes with measurable outcomes</small>
+</div>
+</header>
+
+
+<div class="wrap">
+<aside>
+<div class="card">
+<h2>Session Meta</h2>
+<div class="meta">
+<div class="kv"><div class="k">Date</div><div>2025‑09‑16</div></div>
+<div class="kv"><div class="k">Time</div><div>11:15–12:05</div></div>
+<div class="kv"><div class="k">Location</div><div>Café patio → Park loop</div></div>
+<div class="kv"><div class="k">Weather</div><div>72°F, light breeze</div></div>
+<div class="kv"><div class="k">Variables</div><div>strollers (2), skateboard (1), dogs (4)</div></div>
+</div>
+</div>
+<div class="card">
+<h2>KPIs</h2>
+<p class="badge">Recall: 6/7</p>
+<p class="badge">Calm Greeting: 4/6</p>
+<p class="badge">Muzzle Reset: 1</p>
+</div>
+<div class="card">
+<h2>Summary</h2>
+<p>Lower arousal after 12 minutes. Skateboard trigger mitigated with “find‑it” scatter + mat reset. Noted improvement in latency to settle.</p>
+</div>
+</aside>
+
+
+<main>
+<div class="section-grid">
+<section class="card">
+<h2>Observed Behaviors</h2>
+<ul>
+<li>Initial tail flagging, pupils dilated, weight forward at café entrance.</li>
+<li>Sniff‑loops effective; returned to mat after 2 prompts.</li>
+<li>Dog‑dog greeting: soft body, curved approach, brief play bow.</li>
+</ul>
+</section>
+<section class="card">
+<h2>Interventions & Methods</h2>
+<ul>
+<li>“Being the tree” + gentle petting post‑calm state.</li>
+<li>Toy greeting protocol to reduce mouthing.</li>
+<li>Leave‑and‑re‑approach when arousal > yellow.</li>
+</ul>
+</section>
+<section class="card">
+<h2>Data Snapshots</h2>
+<div class="chart">Arousal zones timeline (placeholder)</div>
+</section>
+<section class="card">
+<h2>Notes & Hypotheses</h2>
+<p>Earlier café arrival may reduce crowd density; consider pre‑sniff loop to pre‑empt yellow zone.</p>
+</section>
+</div>
+</main>
+</div>
+
+
+<footer class="site">© Raising Goose — Scientific Journal Template</footer>
+</body>
+</html>
