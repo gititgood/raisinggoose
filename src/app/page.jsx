@@ -8,9 +8,13 @@ import Categories from "../../components/Categories";
 import Tools from "../../components/Tools";
 import Footer from "../../components/Footer";
 import styles from "../../styles/Home.css";
-import { client } from "../lib/sanity.client";
+import { client, getHero } from "../lib/sanity.client";
+import HeroImage from "../../components/HeroImage";
 import { getCarouselByKey } from '../lib/getCarousel'
-
+import { homePageQuery } from '@/lib/queries'
+import HeroSection from '../../components/HeroSection'
+import { ImageOverlaySection } from '../../components/ImageOverlaySection'
+import TimelineServer from '../../components/TimelineServer';
 
 export const revalidate = 60; // ISR in App Router
 
@@ -20,9 +24,10 @@ export default async function HomePage() {
       _id, title, "slug": slug.current, mainImage, excerpt, _createdAt
     }`
   );
-
+  const data = await client.fetch(homePageQuery)
+  const sections = data?.sections || []
   const heroCarousel = await getCarouselByKey('homepage');
-
+  const hero = await getHero();
   return (
   <main className="rg-container">
     <header className="rg-header">
@@ -35,9 +40,24 @@ export default async function HomePage() {
         <a href="#tools">Tools</a>
       </nav>
     </header>
-
+     {sections.map((s) => {
+        switch (s._type) {
+          case 'heroSection':
+            return <HeroSection key={s._key} {...s} />
+          case 'imageOverlaySection':
+            return <ImageOverlaySection key={s._key} {...s} />
+          default:
+            return null
+        }
+      })}
       {/* Choose one hero approach (or keep both while you decide) */}
-      <HeroCarousel slides={heroCarousel.slides} />
+      <HeroImage
+        title={hero?.title}
+        description={hero?.description}
+        imageUrl={hero?.imageUrl}
+      />
+      {/*<HeroCarousel slides={heroCarousel.slides} /> */}
+       <TimelineServer />
       <HeroWithMemorial />
 
       {/* Sanity-powered feed */}

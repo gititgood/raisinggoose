@@ -28,7 +28,7 @@ export default function HeroCarousel({
   // Build a full-frame (no-crop) delivery URL
   const srcFor = (s) =>
     s?.image
-      ? urlFor(s.image).width(1600).fit('max').auto('format').quality(80).url()
+      ? urlFor(s.image).width(1600).fit('clip').auto('format').quality(80).url()
       : ''
 
   // Pass current index + minHeight to CSS via custom props

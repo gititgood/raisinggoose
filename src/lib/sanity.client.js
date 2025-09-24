@@ -6,3 +6,8 @@ export const client = createClient({
   apiVersion: '2024-01-01',
   useCdn: true, // fast, published content only
 })
+
+export async function getHero() {
+const { heroQuery } = await import("@/lib/queries");
+return client.fetch(heroQuery);
+}
