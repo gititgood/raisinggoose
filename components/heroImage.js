@@ -1,4 +1,4 @@
-// HeroImage.jsx (server component is fine) make sure this is different from HeroSection.jsx
+// HeroImage.jsx (server component is fine) 
 import Image from "next/image";
 
 export default function HeroImage({ title, description, imageUrl, priority = true }) {
