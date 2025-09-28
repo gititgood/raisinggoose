@@ -51,15 +51,14 @@ export default async function HomePage() {
         }
       })}
       {/* Choose one hero approach (or keep both while you decide) */}
-      <HeroImage
+      {/*<HeroImage
         title={hero?.title}
         description={hero?.description}
         imageUrl={hero?.imageUrl}
-      />
+      /> */}
       {/*<HeroCarousel slides={heroCarousel.slides} /> */}
        <TimelineServer />
       <HeroWithMemorial />
-
       {/* Sanity-powered feed */}
       <Feed posts={posts} />
 

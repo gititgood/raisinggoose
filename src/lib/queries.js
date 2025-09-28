@@ -88,3 +88,19 @@ export const TimelineQuery = `
   }
 }
 `
+
+export const SITE_NOTICE_QUERY = groq`
+*[_type == "siteNotice" && _id == "siteNotice"][0]{
+  enabled,
+  version,
+  title,
+  message,
+  accentHex,
+  image{
+    asset->{_id, url, metadata{dimensions}},
+    alt,
+    crop,
+    hotspot
+  }
+}
+`;

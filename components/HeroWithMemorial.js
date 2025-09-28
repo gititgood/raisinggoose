@@ -10,7 +10,7 @@ export default function HeroMemorial() {
       </section>
       <section className="rg-memorial">
         <h3>In Loving Memory of Sami</h3>
-        <p>This journey with Goose is an ode to the dog who taught me how to care.</p>
+        <p>This journey with Goose is an ode to the dog who taught me how to patience through love</p>
         <a className="rg-link" href="#">Read my ode to Sam →</a>
       </section>
     </>
