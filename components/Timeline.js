@@ -13,14 +13,13 @@ export default function Timeline({ entries, titleLinkHref }) {
   return (
     <section className="rg-container my-10">
       <div className="mb-6 flex items-baseline justify-between">
-        <h2 className="text-2xl font-semibold" style={{ color: '#8b0000' }}>
-          Goose Timeline
+        <h2 className={`text-3xl font-bold mb-4`}>
+          Goose's Growth By Month
         </h2>
         {titleLinkHref && (
           <a
             href={titleLinkHref}
             className="text-sm underline hover:no-underline"
-            style={{ color: '#8b0000' }}
           >
             View full timeline →
           </a>
