@@ -15,9 +15,13 @@ import { homePageQuery } from '@/lib/queries'
 import HeroSection from '../../components/HeroSection'
 import { ImageOverlaySection } from '../../components/ImageOverlaySection'
 import TimelineServer from '../../components/TimelineServer';
+import { Permanent_Marker } from 'next/font/google'
 
 export const revalidate = 60; // ISR in App Router
-
+const permanentMarker = Permanent_Marker({
+    subsets: ["latin"],
+    weight: "400", // Permanent Marker only comes in one weight
+  });
 export default async function HomePage() {
   const posts = await client.fetch(
     `*[_type == "post"] | order(_createdAt desc)[0...20]{
@@ -28,10 +32,11 @@ export default async function HomePage() {
   const sections = data?.sections || []
   const heroCarousel = await getCarouselByKey('homepage');
   const hero = await getHero();
+  
   return (
   <main className="rg-container">
     <header className="rg-header">
-      <h1 className="rg-logo">Raising Goose</h1>
+      <h1 className={`rg-logo ${permanentMarker.className}`}>Raising Goose</h1>
       <nav className="rg-nav">
         <a href="#">Daily Posts</a>
         <a href="#">Training</a>
@@ -44,8 +49,8 @@ export default async function HomePage() {
         switch (s._type) {
           case 'heroSection':
             return <HeroSection key={s._key} {...s} />
-          case 'imageOverlaySection':
-            return <ImageOverlaySection key={s._key} {...s} />
+          /*case 'imageOverlaySection':
+            return <ImageOverlaySection key={s._key} {...s} />*/ // Currently not used on homepage this is the side by side image with overlay text
           default:
             return null
         }
@@ -61,10 +66,6 @@ export default async function HomePage() {
       <HeroWithMemorial />
       {/* Sanity-powered feed */}
       <Feed posts={posts} />
-
-      <LevelUp />
-      <Categories />
-      <Tools />
 
       <footer className="rg-footer">© Raising Goose — Homepage Template</footer>
     </main>

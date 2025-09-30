@@ -2,6 +2,12 @@
 
 import Image from 'next/image';
 import clsx from 'clsx';
+import { Permanent_Marker } from "next/font/google";
+
+const permanentMarker = Permanent_Marker({
+  subsets: ["latin"],
+  weight: "400",
+});
 
 export default function Timeline({ entries, titleLinkHref }) {
   return (
@@ -48,8 +54,8 @@ function PolaroidCard({ entry, rotateIndex }) {
 
   const AgeOverlay = (
     <span
-      className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full px-3 py-1 text-xs font-semibold bg-white/90 shadow-md"
-      style={{ border: '1px solid #8b0000', color: '#8b0000' }}
+      className={`absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-semibold bg-white/90 shadow-md whitespace-nowrap ${permanentMarker.className}`}
+      style={{ fontSize: '1.5rem' }}
     >
       {entry?.ageLabel}
     </span>
