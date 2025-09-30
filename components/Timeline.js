@@ -14,7 +14,7 @@ export default function Timeline({ entries, titleLinkHref }) {
     <section className="rg-container my-10">
       <div className="mb-6 flex items-baseline justify-between">
         <h2 className={`text-3xl font-bold mb-4`}>
-          Goose's Growth By Month
+          Goose&apos;s Growth By Month
         </h2>
         {titleLinkHref && (
           <a
