@@ -3,19 +3,18 @@ import Header from "../../components/Header";
 import HeroCarousel from "../../components/HeroCarousel";
 import HeroWithMemorial from "../../components/HeroWithMemorial";
 import Feed from "../../components/Feed";
-import LevelUp from "../../components/LevelUp";
-import Categories from "../../components/Categories";
-import Tools from "../../components/Tools";
 import Footer from "../../components/Footer";
 import styles from "../../styles/Home.css";
 import { client, getHero } from "../lib/sanity.client";
 import HeroImage from "../../components/HeroImage";
 import { getCarouselByKey } from '../lib/getCarousel'
-import { homePageQuery } from '@/lib/queries'
+import { homePageQuery, MEMORIAL_CARD_QUERY } from '@/lib/queries'
 import HeroSection from '../../components/HeroSection'
 import { ImageOverlaySection } from '../../components/ImageOverlaySection'
 import TimelineServer from '../../components/TimelineServer';
 import { Permanent_Marker } from 'next/font/google'
+import MemorialCard from '../../components/MemorialCard'
+import { PortableText } from '@portabletext/react';
 
 export const revalidate = 60; // ISR in App Router
 const permanentMarker = Permanent_Marker({
@@ -29,10 +28,12 @@ export default async function HomePage() {
     }`
   );
   const data = await client.fetch(homePageQuery)
+  const dataMemorial = await client.fetch(MEMORIAL_CARD_QUERY)
   const sections = data?.sections || []
   const heroCarousel = await getCarouselByKey('homepage');
   const hero = await getHero();
-  
+  console.log('memorial data', dataMemorial)
+
   return (
   <main className="rg-container">
     <header className="rg-header">
@@ -62,7 +63,17 @@ export default async function HomePage() {
         imageUrl={hero?.imageUrl}
       /> */}
       {/*<HeroCarousel slides={heroCarousel.slides} /> */}
-       <TimelineServer />
+       <MemorialCard
+          images={dataMemorial.images}
+          title={dataMemorial.title}
+          body={<PortableText value={dataMemorial.body} />}
+          cardBg={dataMemorial.cardBg}
+          mode={dataMemorial.mode}
+          accentColor={dataMemorial.accentColor}
+          __layout={dataMemorial.layout}
+      />
+
+      <TimelineServer />
       <HeroWithMemorial />
       {/* Sanity-powered feed */}
       <Feed posts={posts} />

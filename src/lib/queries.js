@@ -35,7 +35,6 @@ export const homePageQuery = `
     copy,
     image{ asset->{url, metadata{dimensions}}, crop, hotspot },
     imagePosition,
-
     overlayMode,
     "images": images[]{
       ...select(
@@ -50,14 +49,14 @@ export const homePageQuery = `
         }
       )
     },
-
     overlay,
     overlayColor,
     overlayBg,
     overlayAlign,
     overlayLink
-  }
-}`;
+  },
+}
+`;
 
 
 export const heroSectionsQuery = `
@@ -101,6 +100,23 @@ export const SITE_NOTICE_QUERY = groq`
     alt,
     crop,
     hotspot
+  }
+}
+`;
+
+export const MEMORIAL_CARD_QUERY = `
+*[_type == "memorialCard"][0]{
+  "title": coalesce(title, headline),
+  body,
+  accentColor,
+  mode,
+  layout,
+  cardBg,
+  images[]{
+    image,
+    alt,
+    label,
+    "url": image.asset->url
   }
 }
 `;
