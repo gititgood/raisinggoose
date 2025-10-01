@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 // If you use Sanity Portable Text for the body copy, uncomment below and install:
-// import { PortableText } from "@portabletext/react";
+import { PortableText } from "@portabletext/react";
 
 /**
  * MemorialCard
