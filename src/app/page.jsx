@@ -81,8 +81,6 @@ export default async function HomePage() {
       {/* Timeline of growth */}
 
       <TimelineServer />
-      <HeroWithMemorial />
-      {/* Sanity-powered feed */}
       <Feed posts={posts} />
 
       <footer className="rg-footer">© Raising Goose — Homepage Template</footer>
