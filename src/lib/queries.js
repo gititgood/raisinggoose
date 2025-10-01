@@ -112,6 +112,11 @@ export const MEMORIAL_CARD_QUERY = `
   mode,
   layout,
   cardBg,
+  useSingleImage,
+  singleImage{
+    "url": image.asset->url,
+    alt
+  },
   images[]{
     image,
     alt,

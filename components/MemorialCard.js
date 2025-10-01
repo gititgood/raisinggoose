@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import React from "react";
 import { motion } from "framer-motion";
 // If you use Sanity Portable Text for the body copy, uncomment below and install:
@@ -22,10 +22,11 @@ export default function MemorialCard(props) {
     title = "In Loving Memory of Sami",
     body = "Forever running ahead, forever waiting back at the gate. Thank you for teaching us patience, joy, and quiet courage.",
     mode = "inline",
-    cardBG = "#FFFFFF",
     className = "",
     accentColor = "#8b0000",
     __layout,
+    useSingleImage = false,
+    singleImage = null,
   } = props
   const overlayClasses =
     "md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2";
@@ -41,57 +42,75 @@ export default function MemorialCard(props) {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="mx-auto w-full max-w-[48rem]"
+        className="mx-auto w-full max-w-[48rem] my-10 sm:my-16"
       >
-        <div className="relative  bg-white/95 ring-1 ring-neutral-900/5">
-          <div
-            style={{ borderColor: accentColor }}
-          >
-            <div className="rounded-[22px] outline outline-1 outline-white/60">
-              <div className="relative rounded-2xl bg-white p-5 sm:p-7">
-                {/* Three polaroids */}
-                <div className="relative mx-auto hidden h-[400px] max-w-[48rem] md:block">
-                  {images.slice(0, 3).map((img, i) => {
-                    const theta = (angles[i] * Math.PI) / 180;
-                    const x = Math.cos(theta) * radius;
-                    const y = Math.sin(theta) * radius + verticalOffset;
-                    const rotation = [-10, 0, 10][i];
-                    return (
-                      <Polaroid
-                        key={i}
-                        img={img}
-                        style={{
-                          position: "absolute",
-                          left: "50%",
-                          top: "50%",
-                          transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) rotate(${rotation}deg)`,
-                        }}
-                        accentColor={accentColor}
+        <div className="relative bg-white">
+          <div>
+            <div>
+              <div className="relative bg-white p-5 sm:p-7">
+                {/* Single image mode */}
+                {((typeof useSingleImage === 'boolean' ? useSingleImage : !!__layout?.useSingleImage)) && (singleImage?.url || images?.[0]?.url) && (
+                  <div className="flex justify-center">
+                    <div className="relative mx-auto h-[600px] w-[450px] overflow-hidden bg-white ring-1 ring-neutral-900/5">
+                      <img
+                        src={(singleImage?.url) || images?.[0]?.url}
+                        alt={(singleImage?.alt) || images?.[0]?.alt || "Memorial photo"}
+                        className="h-full w-full object-cover"
                       />
-                    );
-                  })}
-                </div>
-
-                {/* Mobile layout: stacked with offsets */}
-                <div className="md:hidden">
-                  <div className="flex flex-col items-center gap-4">
-                    {images.slice(0, 3).map((img, i) => (
-                      <Polaroid
-                        key={i}
-                        img={img}
-                        className={
-                          i === 0
-                            ? "-rotate-3 -translate-x-2"
-                            : i === 1
-                            ? "rotate-0"
-                            : "rotate-3 translate-x-2"
-                        }
-                        accentColor={accentColor}
-                        size="large"
-                      />
-                    ))}
+                    </div>
                   </div>
-                </div>
+                )}
+
+                {/* Three polaroids (only when NOT single image mode) */}
+                {!((typeof useSingleImage === 'boolean' ? useSingleImage : !!__layout?.useSingleImage)) && (
+                  <>
+                    <div className="relative mx-auto hidden h-[400px] max-w-[48rem] md:block">
+                      {images.slice(0, 3).map((img, i) => {
+                        const baseAngles = Array.isArray(__layout?.angles) && __layout.angles.length === 3 ? __layout.angles : [210, 270, 330];
+                        const theta = (baseAngles[i] * Math.PI) / 180;
+                        const baseRadius = typeof __layout?.radius === 'number' ? __layout.radius : 220;
+                        const baseOffset = typeof __layout?.verticalOffset === 'number' ? __layout.verticalOffset : 60;
+                        const x = Math.cos(theta) * baseRadius;
+                        const y = Math.sin(theta) * baseRadius + baseOffset;
+                        const rotation = [-10, 0, 10][i];
+                        return (
+                          <Polaroid
+                            key={i}
+                            img={img}
+                            style={{
+                              position: "absolute",
+                              left: "50%",
+                              top: "50%",
+                              transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) rotate(${rotation}deg)`,
+                            }}
+                            accentColor={accentColor}
+                          />
+                        );
+                      })}
+                    </div>
+
+                    {/* Mobile layout: stacked with offsets */}
+                    <div className="md:hidden">
+                      <div className="flex flex-col items-center gap-4">
+                        {images.slice(0, 3).map((img, i) => (
+                          <Polaroid
+                            key={i}
+                            img={img}
+                            className={
+                              i === 0
+                                ? "-rotate-3 -translate-x-2"
+                                : i === 1
+                                ? "rotate-0"
+                                : "rotate-3 translate-x-2"
+                            }
+                            accentColor={accentColor}
+                            size="large"
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </>
+                )}
 
                 {/* Headline & body */}
                 <div className="mt-4 text-center">
@@ -125,13 +144,7 @@ export default function MemorialCard(props) {
                   </div>
                 </div>
 
-                <div
-                  className="pointer-events-none absolute -inset-6 -z-10 rounded-3xl blur-2xl"
-                  style={{
-                    background:
-                      "radial-gradient(60% 60% at 50% 40%, rgba(255,250,243,0.9) 0%, rgba(255,250,243,0.45) 50%, rgba(255,250,243,0) 100%)",
-                  }}
-                />
+                
               </div>
             </div>
           </div>
@@ -168,3 +181,4 @@ function Polaroid({ img, className = "", style, accentColor = "#8b0000", size = 
     </div>
   );
 }
+

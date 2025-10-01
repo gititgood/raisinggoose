@@ -63,15 +63,22 @@ export default async function HomePage() {
         imageUrl={hero?.imageUrl}
       /> */}
       {/*<HeroCarousel slides={heroCarousel.slides} /> */}
-       <MemorialCard
-          images={dataMemorial.images}
-          title={dataMemorial.title}
-          body={<PortableText value={dataMemorial.body} />}
-          cardBg={dataMemorial.cardBg}
-          mode={dataMemorial.mode}
-          accentColor={dataMemorial.accentColor}
-          __layout={dataMemorial.layout}
-      />
+       <section className="border-y border-neutral-200/60 dark:border-zinc-800">
+        <div className="mx-auto max-w-[72rem] px-4 sm:px-6">
+          <MemorialCard
+              images={dataMemorial.images}
+              title={dataMemorial.title}
+              body={dataMemorial.body}
+              cardBg={dataMemorial.cardBg}
+              mode={dataMemorial.mode}
+              accentColor={dataMemorial.accentColor}
+              __layout={dataMemorial.layout}
+                useSingleImage={dataMemorial.useSingleImage}
+              singleImage={dataMemorial.singleImage}
+          />
+        </div>
+      </section>
+      {/* Timeline of growth */}
 
       <TimelineServer />
       <HeroWithMemorial />
