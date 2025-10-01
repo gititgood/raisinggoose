@@ -1,16 +1,7 @@
 'use client'
 import React from "react";
 import { motion } from "framer-motion";
-// If you use Sanity Portable Text for the body copy, uncomment below and install:
-import { PortableText } from "@portabletext/react";
-
-/**
- * MemorialCard
- *
- * V5: Enlarged and lowered polaroid-style photos arranged along an arc.
- * Reduced gap between the images and headline/text.
- * Headline and body now use the hero section font via the `font-hero` utility class.
- */
+import { PortableText } from "@portabletext/react"; // <-- Move import here
 
 export default function MemorialCard(props) {
   const {
@@ -27,7 +18,7 @@ export default function MemorialCard(props) {
     __layout,
     useSingleImage = false,
     singleImage = null,
-  } = props
+  } = props;
   const overlayClasses =
     "md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2";
   const wrapperClasses = mode === "overlay" ? `${overlayClasses} pointer-events-none md:pointer-events-auto` : "";
@@ -121,21 +112,10 @@ export default function MemorialCard(props) {
                     {title}
                   </h3>
                   <div className="font-hero mx-auto mt-2 max-w-prose text-sm leading-relaxed text-neutral-700 sm:text-base">
-                    {(() => {
-                      const isReactElement = body && typeof body === 'object' && body.$$typeof;
-                      if (isReactElement) return body; // already a React node (e.g., <PortableText />)
-                      if (Array.isArray(body)) {
-                        // Portable Text blocks provided directly
-                        try {
-                          // Lazy require to avoid bundling if unused
-                          const { PortableText } = require('@portabletext/react');
-                          return <PortableText value={body} />;
-                        } catch {
-                          return <p>{`/* PortableText not installed. Install @portabletext/react or pass a rendered node. */`}</p>;
-                        }
-                      }
-                      return <p>{body}</p>;
-                    })()}
+                    {Array.isArray(body) && body.length > 0
+                      ? <PortableText value={body} />
+                      : <p>{typeof body === "string" ? body : ""}</p>
+                    }
                   </div>
                   <div className="mt-4 flex items-center justify-center gap-2">
                     <span className="h-px w-10" style={{ backgroundColor: `${accentColor}30` }} />
@@ -143,8 +123,6 @@ export default function MemorialCard(props) {
                     <span className="h-px w-10" style={{ backgroundColor: `${accentColor}30` }} />
                   </div>
                 </div>
-
-                
               </div>
             </div>
           </div>
