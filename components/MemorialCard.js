@@ -2,7 +2,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { PortableText } from "@portabletext/react"; // <-- Move import here
+import { Fraunces, Cormorant_Garamond, Marcellus } from 'next/font/google';
 
+const fraunces = Fraunces({ subsets: ['latin'], variable:'--font-fraunces' });
+const cormorant = Cormorant_Garamond({ subsets: ['latin'], variable:'--font-cormorant' });
+const marcellus = Marcellus({ subsets: ['latin'], weight: '400', variable:'--font-marcellus' });
 export default function MemorialCard(props) {
   const {
     images = [
@@ -42,11 +46,11 @@ export default function MemorialCard(props) {
                 {/* Single image mode */}
                 {((typeof useSingleImage === 'boolean' ? useSingleImage : !!__layout?.useSingleImage)) && (singleImage?.url || images?.[0]?.url) && (
                   <div className="flex justify-center">
-                    <div className="relative mx-auto h-[600px] w-[450px] overflow-hidden bg-white ring-1 ring-neutral-900/5">
+                    <div className="relative mx-auto h-[450px] w-[350px] overflow-hidden bg-white ring-1 ring-neutral-900/5">
                       <img
                         src={(singleImage?.url) || images?.[0]?.url}
                         alt={(singleImage?.alt) || images?.[0]?.alt || "Memorial photo"}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-contain"
                       />
                     </div>
                   </div>
@@ -106,12 +110,12 @@ export default function MemorialCard(props) {
                 {/* Headline & body */}
                 <div className="mt-4 text-center">
                   <h3
-                    className="font-hero text-2xl font-semibold tracking-wide sm:text-3xl"
+                    className={`${fraunces.className} text-2xl font-semibold tracking-wide sm:text-3xl`}
                     style={{ color: accentColor }}
                   >
                     {title}
                   </h3>
-                  <div className="font-hero mx-auto mt-2 max-w-prose text-sm leading-relaxed text-neutral-700 sm:text-base">
+                  <div className={`${cormorant.className} mx-auto mt-2 max-w-prose text-xl leading-relaxed text-neutral-700`}>
                     {Array.isArray(body) && body.length > 0
                       ? <PortableText value={body} />
                       : <p>{typeof body === "string" ? body : ""}</p>
